@@ -1,13 +1,11 @@
 # Authorship Attribution Benchmark
 
-Experiments for the paper "Developing a Benchmark for Reducing Data Bias in Authorship Attribution".
+Dataset tools for the paper "Developing a Benchmark for Reducing Data Bias in Authorship Attribution".
 
 
 ## Requirements
-- Python >= 3.6, < 3.9.
+- Python >= 3.8, < 4.
 If you don't have this version on your computer, you might want to check out [pyenv](https://github.com/pyenv/pyenv).
-
-- A GPU with at least 12GB RAM + CUDA >= 10.2
 
 - This project uses and requires [poetry](https://python-poetry.org) to manage dependencies. You can install it using:
 
@@ -58,20 +56,18 @@ Then, the parser can be run on the unified data using the following command:
 poetry run parse_dependency data/cl_novels_processed
 ```
 
+## Usage
 
-## Usage/Reproduction
-This project uses the `dbispipeline` library, the configuration of this library is documented [here](https://git.uibk.ac.at/dbis/software/dbispipeline).
-Thereby, each experiment is in a plan file located in `plans`.
-For example, the file `plans/cpu/cmcc.py` contains the instructions for the CMCC dataset with all models that should run on a cpu.
+The basic usage is:
 
-To run an experiment, run:
-
-```bash
-poetry run dbispipeline plans/cpu/cmcc.py
+```python
+loader = RedditLoader('path/to/reddit/dataset')
+df, targets, splits = loader.load()
+model = make_pipeline(...)   # some sklearn model
+grid = GridSearchCV(model, params, cv=splits)
+grid.fit(df, targets)
 ```
 
-If you don't want to store the results in a database, you can add the `--dryrun` parameter to locally print any results.
+A working example is included in `tests/test_limiting_loaders.py`
 
-The plans are split into cpu and gpu to be able to run some experiments on machines without gpus in parallel.
-
-Copyright (c) 2021 Benjamin Murauer
+Copyright (c) 2022 Benjamin Murauer
