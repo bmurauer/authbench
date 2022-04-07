@@ -70,4 +70,13 @@ grid.fit(df, targets)
 
 A working example is included in `tests/test_limiting_loaders.py`
 
+
+## Cite
+
+If you use this software, please consider citing my paper:
+
+Benjamin Murauer and Günther Specht. 2021. Developing a Benchmark for Reducing Data Bias in Authorship Attribution. In Proceedings of the 2nd Workshop on Evaluation and Comparison of NLP Systems, pages 179–188, Punta Cana, Dominican Republic. Association for Computational Linguistics.
+
+https://aclanthology.org/2021.eval4nlp-1.18/
+
 Copyright (c) 2022 Benjamin Murauer
