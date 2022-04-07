@@ -1,0 +1,46 @@
+
+[tool.poetry]
+name = "authbench"
+version = "0.1.0"
+description = "Authorship Attribution Benchmark."
+authors = ["Benjamin Murauer <b.murauer@posteo.de>"]
+license = 'License :: OSI Approved :: BSD License'
+
+[tool.poetry.dependencies]
+python = "^3.8.0"
+langdetect = "^1.0.9"
+pandas = "^1.4.2"
+sklearn = "^0.0"
+
+
+[tool.poetry.dev-dependencies]
+isort = "*"
+pytest = "*"
+black = {version = "^21.5b0", allow-prereleases = true}
+mypy = "^0.812"
+pre-commit = "^2.13.0"
+tqdm = "^4.64.0"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 79
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+envlist = py37
+
+[testenv]
+whitelist_externals = poetry
+commands =
+  poetry install -v
+  poetry run pytest tests/
+"""
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
